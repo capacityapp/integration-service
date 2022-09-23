@@ -1,0 +1,6 @@
+apps:
+  - script: ./dist/index.js
+    name: 'integration-service'
+    exec_mode: fork
+    env:
+      NODE_ENV: production

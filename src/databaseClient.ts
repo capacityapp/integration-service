@@ -1,0 +1,54 @@
+import * as sql from 'mssql'
+
+const config = {
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
+  database: process.env.DB_NAME,
+  server: process.env.DB_HOST,
+  options: {
+    encrypt: false,
+  },
+}
+
+export const streamQuery = ({
+  query,
+  action,
+  batchSize,
+}: {
+  query: string
+  action: (rows: Array<any>) => Promise<void>
+  batchSize: number
+}) =>
+  sql.connect(config).then(
+    (pool) =>
+      new Promise((resolve) => {
+        const request = new sql.Request(pool)
+        request.stream = true
+        request.query(query)
+
+        let rowsToProcess = []
+
+        request.on('row', (row) => {
+          rowsToProcess.push(row)
+          if (rowsToProcess.length >= batchSize) {
+            request.pause()
+            action(rowsToProcess).then(() => {
+              rowsToProcess = []
+              request.resume()
+            })
+          }
+        })
+
+        request.on('error', (err) => {
+          console.error(err)
+        })
+
+        request.on('done', () => {
+          action(rowsToProcess).then(() => {
+            rowsToProcess = []
+            request.resume()
+            resolve()
+          })
+        })
+      }),
+  )
