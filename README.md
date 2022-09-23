@@ -39,9 +39,9 @@ CLIENT_QUERY=SELECT * from clients;
 ## Pulling the docker container
 
 Pull the latest image within your chosen linux environment before starting the container:
-
+```
 docker pull public.ecr.aws/b3l4d2w0/capacity-integration-service:latest
-
+```
 
 ## Starting the docker container
 
