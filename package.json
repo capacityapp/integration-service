@@ -11,8 +11,7 @@
     "build": "rm -rf dist || true && babel src -d dist --extensions '.ts'",
     "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix",
     "lint-ci": "eslint 'src/**/*.{js,ts,tsx}'",
-    "release-image": "./scripts/releaseImage.sh",
-    "start-prod": "pm2-runtime start production.yml"
+    "release-image": "./scripts/releaseImage.sh"
   },
   "dependencies": {
     "got": "^11.8.2",
