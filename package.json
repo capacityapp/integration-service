@@ -17,9 +17,10 @@
   "dependencies": {
     "got": "^11.8.2",
     "lodash.uniqby": "^4.7.0",
-    "loglevel": "^1.8.0",
     "mssql": "^8.1.1",
     "node-schedule": "^2.1.0",
+    "pino": "^8.6.1",
+    "pino-pretty": "^9.1.0",
     "pm2": "^5",
     "query-string": "^7.1.1"
   },

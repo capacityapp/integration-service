@@ -1,5 +1,5 @@
 import * as sql from 'mssql'
-import log from 'loglevel'
+import { logger } from 'logger'
 
 const config = {
   user: process.env.DB_USER,
@@ -41,7 +41,7 @@ export const streamQuery = ({
         })
 
         request.on('error', (err) => {
-          log.error(err)
+          logger.error(err)
           throw err
         })
 
