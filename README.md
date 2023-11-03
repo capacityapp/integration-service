@@ -17,10 +17,14 @@ DB_NAME: the database name
 DB_HOST: the hostname for the database
 MATTER_QUERY:  the query you wish the integration service to run in order to get matters.
 CLIENT_QUERY: the query you wish the integration service to run in order to get clients.
+PROFILE_QUERY: the query you wish the integration service to run in order to get profiles.
+HISTORIC_UTILISATION_QUERY: the query you wish the integration service to run in order to get historic utilisation.
 MATTER_BATCH_SIZE: the matter batch size, defaults to 2000 database rows
 CLIENT_BATCH_SIZE: the client batch size, defaults to 2000 database rows
+PROFILE_BATCH_SIZE: the profile batch size, defaults to 2000 database rows
+HISTORIC_UTILISATION_BATCH_SIZE: the historic utilisation batch size, defaults to 10000 database rows
 ```
-Make sure the queries supplied return the fields following the naming schema laid out in “How the API Works”
+Make sure the queries supplied return the fields following the naming schema in https://swagger.capacityapp.io/swagger/#/. Note, for the historic utilisation table you must also include an email column.
 
 Example file:
 ```
@@ -34,6 +38,8 @@ DB_NAME=master
 DB_HOST=localhost
 MATTER_QUERY=SELECT * from matters;
 CLIENT_QUERY=SELECT * from clients;
+PROFILE_QUERY=SELECT * from profiles;
+HISTORIC_UTILISATION_QUERY=SELECT * from historic_utilisation;
 ```
 
 ## Pulling the docker container
