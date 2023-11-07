@@ -15,6 +15,7 @@
     "start-prod": "pm2-runtime start production.yml"
   },
   "dependencies": {
+    "babel-plugin-module-resolver": "^5.0.0",
     "got": "^11.8.2",
     "lodash.uniqby": "^4.7.0",
     "mssql": "^8.1.1",
@@ -39,11 +40,10 @@
     "@typescript-eslint/parser": "^4.33.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.2.3",
-    "babel-plugin-module-resolver": "^3.1.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-node": "^8.0.0",
-    "nodemon": "^2",
+    "nodemon": "^3",
     "prettier": "^2.4.1",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
