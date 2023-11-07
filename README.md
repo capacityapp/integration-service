@@ -15,10 +15,10 @@ DB_USER: the database username that you wish the integration service to use
 DB_PWD: the password for this database user
 DB_NAME: the database name
 DB_HOST: the hostname for the database
-MATTER_QUERY:  the query you wish the integration service to run in order to get matters.
-CLIENT_QUERY: the query you wish the integration service to run in order to get clients.
-PROFILE_QUERY: the query you wish the integration service to run in order to get profiles.
-HISTORIC_UTILISATION_QUERY: the query you wish the integration service to run in order to get historic utilisation.
+MATTER_QUERY:  the query you wish the integration service to run in order to get matters. Naming should match https://swagger.capacityapp.io/swagger/#/default/post_matters
+CLIENT_QUERY: the query you wish the integration service to run in order to get clients. Naming should match https://swagger.capacityapp.io/swagger/#/default/post_clients
+PROFILE_QUERY: the query you wish the integration service to run in order to get profiles. Naming should match https://swagger.capacityapp.io/swagger/#/default/post_profiles
+HISTORIC_UTILISATION_QUERY: the query you wish the integration service to run in order to get historic utilisation. Naming should match https://swagger.capacityapp.io/swagger/#/default/post_profiles_utilisation
 MATTER_BATCH_SIZE: the matter batch size, defaults to 2000 database rows
 CLIENT_BATCH_SIZE: the client batch size, defaults to 2000 database rows
 PROFILE_BATCH_SIZE: the profile batch size, defaults to 2000 database rows
