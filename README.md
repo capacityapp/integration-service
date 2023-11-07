@@ -1,6 +1,6 @@
 # Capacity integration container
 
-We have produced a simple Docker container that can help you bootstrap your data integration. It takes some configuration values and handles the batching and sending of data to our API so you don’t have to write this code. Simply start the container using Docker within a Linux environment and leave it running. Now all you have to do is maintain the tables that the container reads from so that all clients and matters that you wish to be in Capacity are present.
+We have produced a simple Docker container that can help you bootstrap your data integration. It takes some configuration values and handles the batching and sending of data to our API so you don’t have to write this code. Simply start the container using Docker within a Linux environment and leave it running. Now all you have to do is maintain the tables that the container reads from so that data in Capacity is up to date.
 
 
 ## Configuration
