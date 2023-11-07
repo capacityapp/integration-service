@@ -6,7 +6,7 @@ We have produced a simple Docker container that can help you bootstrap your data
 ## Configuration
 
 The configuration is supplied via a yaml file with the following properties
- ```
+
 SCHEDULE_PATTERN: a cron pattern that will describe the upload schedule
 SUBDOMAIN: your firm’s Capacity subdomain 
 BASE_URL: we will supply this to you
@@ -23,7 +23,7 @@ MATTER_BATCH_SIZE: the matter batch size, defaults to 2000 database rows
 CLIENT_BATCH_SIZE: the client batch size, defaults to 2000 database rows
 PROFILE_BATCH_SIZE: the profile batch size, defaults to 2000 database rows
 HISTORIC_UTILISATION_BATCH_SIZE: the historic utilisation batch size, defaults to 2000 database rows
-```
+
 Make sure the queries supplied return the fields following the naming schema in https://swagger.capacityapp.io/swagger/#/.
 
 Example file:
