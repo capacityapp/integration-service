@@ -22,9 +22,9 @@ HISTORIC_UTILISATION_QUERY: the query you wish the integration service to run in
 MATTER_BATCH_SIZE: the matter batch size, defaults to 2000 database rows
 CLIENT_BATCH_SIZE: the client batch size, defaults to 2000 database rows
 PROFILE_BATCH_SIZE: the profile batch size, defaults to 2000 database rows
-HISTORIC_UTILISATION_BATCH_SIZE: the historic utilisation batch size, defaults to 10000 database rows
+HISTORIC_UTILISATION_BATCH_SIZE: the historic utilisation batch size, defaults to 2000 database rows
 ```
-Make sure the queries supplied return the fields following the naming schema in https://swagger.capacityapp.io/swagger/#/. Note, for the historic utilisation table you must also include an email column.
+Make sure the queries supplied return the fields following the naming schema in https://swagger.capacityapp.io/swagger/#/.
 
 Example file:
 ```
