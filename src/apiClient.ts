@@ -7,3 +7,9 @@ export const put = ({ endpoint, body, query }) =>
     headers: { Authorization: `Api-Key ${process.env.API_KEY}` },
     search: queryString.stringify(query),
   })
+export const post = ({ endpoint, body, query }) =>
+  got.post(`${process.env.BASE_URL}/${endpoint}`, {
+    json: body,
+    headers: { Authorization: `Api-Key ${process.env.API_KEY}` },
+    search: queryString.stringify(query),
+  })
