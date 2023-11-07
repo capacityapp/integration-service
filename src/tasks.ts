@@ -1,8 +1,7 @@
 import uniqBy from 'lodash.uniqby'
-import groupBy from 'lodash.groupby'
 
 import { streamQuery } from 'databaseClient'
-import { post, put } from 'apiClient'
+import { post } from 'apiClient'
 import { logger } from 'logger'
 
 const MATTER_BATCH_SIZE = process.env.MATTER_BATCH_SIZE
@@ -23,7 +22,7 @@ export const streamMattersToApi = async () => {
     action: async (rows) => {
       logger.info(`Sending batch of ${rows?.length} matters to API`)
 
-      await put({
+      await post({
         endpoint: 'integration/matters',
         query: { state: process.env.SUBDOMAIN },
         body: uniqBy(rows, 'matterNumber'),
@@ -51,7 +50,7 @@ export const streamClientsToApi = async () => {
     action: async (rows) => {
       logger.info(`Sending batch of ${rows?.length} clients to API`)
 
-      await put({
+      await post({
         endpoint: 'integration/clients',
         query: { state: process.env.SUBDOMAIN },
         body: uniqBy(rows, 'clientNumber'),
@@ -94,7 +93,7 @@ export const streamProfilesToApi = async () => {
 const HISTORIC_UTILISATION_BATCH_SIZE = process.env
   .HISTORIC_UTILISATION_BATCH_SIZE
   ? parseInt(process.env.HISTORIC_UTILISATION_BATCH_SIZE, 10)
-  : 10000
+  : 2000
 
 export const streamHistoricUtilisationToApi = async () => {
   if (!process.env.HISTORIC_UTLISATION_QUERY) {
@@ -110,31 +109,14 @@ export const streamHistoricUtilisationToApi = async () => {
     query: process.env.HISTORIC_UTLISATION_QUERY,
     batchSize: HISTORIC_UTILISATION_BATCH_SIZE,
     action: async (rows) => {
-      const groups = groupBy(rows, 'email')
+      logger.info(`Sending batch of ${rows?.length} utilisation rows to API`)
 
-      await Promise.all(
-        Object.keys(groups).map(async (email) => {
-          if (email === 'undefined') {
-            logger.error(
-              '"email" column not included in historic utilisation table so not sending data',
-            )
-            return
-          }
-          const data = groups[email]
-
-          logger.info(
-            `Sending ${data?.length} rows of historic utilisation for ${email} to API`,
-          )
-
-          await post({
-            endpoint: `integration/profiles/${email}/utilisation`,
-            query: { state: process.env.SUBDOMAIN },
-            body: data,
-          })
-        }),
-      )
+      await post({
+        endpoint: `integration/utilisation`,
+        query: { state: process.env.SUBDOMAIN },
+        body: rows,
+      })
     },
   })
-
   logger.info(`Finished sending historic utilisation to API`)
 }
