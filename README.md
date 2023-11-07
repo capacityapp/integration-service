@@ -6,7 +6,7 @@ We have produced a simple Docker container that can help you bootstrap your data
 ## Configuration
 
 The configuration is supplied via a yaml file with the following properties
-
+```
 SCHEDULE_PATTERN: a cron pattern that will describe the upload schedule
 SUBDOMAIN: your firm’s Capacity subdomain 
 BASE_URL: we will supply this to you
@@ -15,7 +15,8 @@ DB_USER: the database username that you wish the integration service to use
 DB_PWD: the password for this database user
 DB_NAME: the database name
 DB_HOST: the hostname for the database
-MATTER_QUERY:  the query you wish the integration service to run in order to get matters. Naming should match https://swagger.capacityapp.io/swagger/#/default/post_matters
+MATTER_QUERY:  the query you wish the integration service to run in order to get matters.
+               Naming should match https://swagger.capacityapp.io/swagger/#/default/post_matters
 CLIENT_QUERY: the query you wish the integration service to run in order to get clients. Naming should match https://swagger.capacityapp.io/swagger/#/default/post_clients
 PROFILE_QUERY: the query you wish the integration service to run in order to get profiles. Naming should match https://swagger.capacityapp.io/swagger/#/default/post_profiles
 HISTORIC_UTILISATION_QUERY: the query you wish the integration service to run in order to get historic utilisation. Naming should match https://swagger.capacityapp.io/swagger/#/default/post_profiles_utilisation
@@ -23,7 +24,7 @@ MATTER_BATCH_SIZE: the matter batch size, defaults to 2000 database rows
 CLIENT_BATCH_SIZE: the client batch size, defaults to 2000 database rows
 PROFILE_BATCH_SIZE: the profile batch size, defaults to 2000 database rows
 HISTORIC_UTILISATION_BATCH_SIZE: the historic utilisation batch size, defaults to 2000 database rows
-
+```
 Make sure the queries supplied return the fields following the naming schema in https://swagger.capacityapp.io/swagger/#/.
 
 Example file:
