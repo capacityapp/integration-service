@@ -30,6 +30,8 @@ HISTORIC_UTILISATION_BATCH_SIZE: the historic utilisation batch size, defaults t
 ```
 Make sure the queries supplied return the fields following the naming schema in https://swagger.capacityapp.io/swagger/#/.
 
+**Note:** where the API expects arrays/lists of strings you can store a comma delimitted VARCHAR in the respective column.
+
 Example file:
 ```
 SCHEDULE_PATTERN=1 * * * *
