@@ -7,6 +7,7 @@ import {
   streamProfilesToApi,
 } from 'tasks'
 
+streamProfilesToApi().then(streamHistoricUtilisationToApi)
 streamClientsToApi().then(streamMattersToApi)
 
 schedule.scheduleJob(process.env.SCHEDULE_PATTERN, async () => {

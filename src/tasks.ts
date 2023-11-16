@@ -96,7 +96,7 @@ const HISTORIC_UTILISATION_BATCH_SIZE = process.env
   : 2000
 
 export const streamHistoricUtilisationToApi = async () => {
-  if (!process.env.HISTORIC_UTLISATION_QUERY) {
+  if (!process.env.HISTORIC_UTILISATION_QUERY) {
     logger.info(
       'Not streaming historic utilisation as no historic utilisation query supplied',
     )
@@ -106,7 +106,7 @@ export const streamHistoricUtilisationToApi = async () => {
   logger.info('Querying historic utilisation table')
 
   await streamQuery({
-    query: process.env.HISTORIC_UTLISATION_QUERY,
+    query: process.env.HISTORIC_UTILISATION_QUERY,
     batchSize: HISTORIC_UTILISATION_BATCH_SIZE,
     action: async (rows) => {
       logger.info(`Sending batch of ${rows?.length} utilisation rows to API`)
