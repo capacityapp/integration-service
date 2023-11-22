@@ -1,9 +1,8 @@
-​CREATE TABLE historic_utilisation (
+CREATE TABLE historic_utilisation (
     email NVARCHAR(250),
     year INT,
     fiscalYear INT,
     week INT,
     availableHours INT,
     utilisedHours INT,
-    PRIMARY KEY (email, fiscalYear, week)
 );
