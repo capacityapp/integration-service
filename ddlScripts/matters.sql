@@ -1,13 +1,12 @@
 CREATE TABLE matters (
-    id INT,
     matterNumber NVARCHAR(50),
-    title NVARCHAR(50),
-    description NVARCHAR(250),
+    title NVARCHAR(MAX),
+    description NVARCHAR(MAX),
     clientNumber NVARCHAR(50),
     isPrivate BIT,
     deadline DATE,
-    leadEmail NVARCHAR(50),
+    leadEmail NVARCHAR(250),
     status NVARCHAR(50),
-    teamEmails NVARCHAR(250),
-    PRIMARY KEY (id)
+    teamEmails NVARCHAR(MAX),
+    PRIMARY KEY (matterNumber)
 );

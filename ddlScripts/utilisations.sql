@@ -1,10 +1,9 @@
-​CREATE TABLE dbo.historic_utilisation (
-    id INT,
-    email NVARCHAR(50),
+​CREATE TABLE historic_utilisation (
+    email NVARCHAR(250),
     year INT,
     fiscalYear INT,
     week INT,
     availableHours INT,
     utilisedHours INT,
-    PRIMARY KEY (id)
+    PRIMARY KEY (email, fiscalYear, week)
 );
