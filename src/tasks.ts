@@ -120,3 +120,32 @@ export const streamHistoricUtilisationToApi = async () => {
   })
   logger.info(`Finished sending historic utilisation to API`)
 }
+
+const OUT_OF_OFFICE_BATCH_SIZE = process.env.OUT_OF_OFFICE_BATCH_SIZE
+  ? parseInt(process.env.OUT_OF_OFFICE_BATCH_SIZE, 10)
+  : 2000
+
+export const streamOutOfOfficeDatesToApi = async () => {
+  if (!process.env.OUT_OF_OFFICE_QUERY) {
+    logger.info('Not streaming oooDates as no out of office query supplied')
+    return
+  }
+
+  logger.info('Querying out_of_office_dates table')
+
+  await streamQuery({
+    query: process.env.OUT_OF_OFFICE_QUERY,
+    batchSize: OUT_OF_OFFICE_BATCH_SIZE,
+    action: async (rows) => {
+      logger.info(`Sending batch of ${rows?.length} out of office to API`)
+
+      await post({
+        endpoint: 'integration/bulk/ooo',
+        query: { state: process.env.SUBDOMAIN },
+        body: rows,
+      })
+    },
+  })
+
+  logger.info(`Finished sending out of office to API`)
+}
