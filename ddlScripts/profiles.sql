@@ -1,4 +1,4 @@
-CREATE TABLE profiles
+CREATE TABLE profiles11
 (
     email                 NVARCHAR(250) NOT NULL,
     firstName             NVARCHAR(50) NOT NULL,
@@ -15,5 +15,6 @@ CREATE TABLE profiles
     chargeOutRateValue    INT,
 -- 3 letter currency code as per ISO 4217
     chargeOutRateCurrency NVARCHAR(3),
+    deactivated           BIT NOT NULL DEFAULT 0,
     PRIMARY KEY (email)
 );
