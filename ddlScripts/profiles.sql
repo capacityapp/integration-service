@@ -1,4 +1,4 @@
-CREATE TABLE profiles11
+CREATE TABLE profiles
 (
     email                 NVARCHAR(250) NOT NULL,
     firstName             NVARCHAR(50) NOT NULL,
