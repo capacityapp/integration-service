@@ -1,0 +1,1 @@
+ALTER TABLE profiles ADD employeeId NVARCHAR(36) NULL;
