@@ -15,6 +15,6 @@ CREATE TABLE profiles
     chargeOutRateValue    INT,
 -- 3 letter currency code as per ISO 4217
     chargeOutRateCurrency NVARCHAR(3),
-    employeeId            NVARCHAR(64),
+    employeeId            NVARCHAR(36),
     PRIMARY KEY (email)
 );
