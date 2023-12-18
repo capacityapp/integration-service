@@ -127,11 +127,11 @@ const OUT_OF_OFFICE_BATCH_SIZE = process.env.OUT_OF_OFFICE_BATCH_SIZE
 
 export const streamOutOfOfficeDatesToApi = async () => {
   if (!process.env.OUT_OF_OFFICE_QUERY) {
-    logger.info('Not streaming oooDates as no out of office query supplied')
+    logger.info('Not streaming OOO as no out of office query supplied')
     return
   }
 
-  logger.info('Querying out_of_office_dates table')
+  logger.info('Querying OOO table')
 
   await streamQuery({
     query: process.env.OUT_OF_OFFICE_QUERY,
@@ -140,12 +140,12 @@ export const streamOutOfOfficeDatesToApi = async () => {
       logger.info(`Sending batch of ${rows?.length} out of office to API`)
 
       await post({
-        endpoint: 'integration/bulk/ooo',
+        endpoint: 'integration/ooo',
         query: { state: process.env.SUBDOMAIN },
         body: rows,
       })
     },
   })
 
-  logger.info(`Finished sending out of office to API`)
+  logger.info(`Finished sending OOO to API`)
 }

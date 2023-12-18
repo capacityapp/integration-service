@@ -8,18 +8,18 @@ import {
   streamProfilesToApi,
 } from 'tasks'
 
-streamProfilesToApi().then(() => {
-  streamHistoricUtilisationToApi()
-  streamOutOfOfficeDatesToApi()
+streamProfilesToApi().then(async () => {
+  await streamHistoricUtilisationToApi()
+  await streamOutOfOfficeDatesToApi()
 })
 streamClientsToApi().then(streamMattersToApi)
 
 
 schedule.scheduleJob(process.env.SCHEDULE_PATTERN, async () => {
   await Promise.all([
-    streamProfilesToApi().then(() => {
-      streamHistoricUtilisationToApi()
-      streamOutOfOfficeDatesToApi()
+    streamProfilesToApi().then(async () => {
+      await streamHistoricUtilisationToApi()
+      await streamOutOfOfficeDatesToApi()
     }),
     streamClientsToApi().then(streamMattersToApi),
   ])
