@@ -5,5 +5,6 @@ CREATE TABLE clients
     description  NVARCHAR(MAX),
 -- comma delimited list of emails
     teamEmails   NVARCHAR(MAX),
+    archived     BIT NOT NULL DEFAULT 0,
     PRIMARY KEY (clientNumber)
 );

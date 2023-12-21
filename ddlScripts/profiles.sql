@@ -1,5 +1,6 @@
 CREATE TABLE profiles
 (
+    employeeId            NVARCHAR(36),
     email                 NVARCHAR(250) NOT NULL,
     firstName             NVARCHAR(50) NOT NULL,
     lastName              NVARCHAR(50) NOT NULL,
@@ -15,6 +16,5 @@ CREATE TABLE profiles
     chargeOutRateValue    INT,
 -- 3 letter currency code as per ISO 4217
     chargeOutRateCurrency NVARCHAR(3),
-    employeeId            NVARCHAR(36),
-    PRIMARY KEY (email)
+    deactivated           BIT NOT NULL DEFAULT 0
 );
