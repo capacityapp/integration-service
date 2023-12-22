@@ -34,7 +34,7 @@ OUT_OF_OFFICE_BATCH_SIZE: the OOO batch size, defaults to 2000 database rows
 ```
 Make sure the queries supplied return the fields following the naming schema in https://swagger.capacityapp.io/swagger/#/.
 
-**Note:** where the API expects arrays/lists of strings you can store a comma delimitted VARCHAR in the respective column.
+**Note:** where the API expects arrays/lists of strings you can store a comma delimited VARCHAR in the respective column.
 
 Example file:
 ```
