@@ -11,6 +11,44 @@ const config = {
   },
 }
 
+const azureConfig = {
+  options: {
+    encrypt: true, // For security
+  },
+  database: process.env.DB_NAME,
+  server: process.env.DB_HOST,
+  dialectOptions: {
+    options: {
+      encrypt: true,
+    },
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+  authentication: {
+    type: 'azure-active-directory-password',
+    options: {
+      clientId: process.env.AZURE_CLIENT_ID,
+
+      encrypt: true,
+      /**
+       * A user need to provide `userName` asscoiate to their account.
+       */
+      userName: process.env.AZURE_USER_NAME,
+      /**
+       * A user need to provide `password` asscoiate to their account.
+       */
+      password: process.env.AZURE_PASSWORD,
+
+      /**
+       * Optional parameter for specific Azure tenant ID
+       */
+      domain: process.env.AZURE_TENANT_ID,
+    },
+  },
+}
+
 export const streamQuery = ({
   query,
   action,
@@ -20,9 +58,9 @@ export const streamQuery = ({
   action: (rows: Array<any>) => Promise<void>
   batchSize: number
 }) =>
-  sql.connect(config).then(
+  sql.connect(process.env.AZURE_USER_NAME ? azureConfig : config).then(
     (pool) =>
-      new Promise((resolve) => {
+      new Promise<void>((resolve) => {
         const request = new sql.Request(pool)
         request.stream = true
         request.query(query)
