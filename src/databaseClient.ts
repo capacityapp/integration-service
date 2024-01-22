@@ -12,26 +12,12 @@ const config = {
 }
 
 const azureConfig = {
-  options: {
-    encrypt: true, // For security
-  },
   database: process.env.DB_NAME,
   server: process.env.DB_HOST,
-  dialectOptions: {
-    options: {
-      encrypt: true,
-    },
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
   authentication: {
     type: 'azure-active-directory-password',
     options: {
       clientId: process.env.AZURE_CLIENT_ID,
-
-      encrypt: true,
       /**
        * A user need to provide `userName` asscoiate to their account.
        */
