@@ -11,10 +11,21 @@ SCHEDULE_PATTERN: a cron pattern that will describe the upload schedule
 SUBDOMAIN: your firm’s Capacity subdomain 
 BASE_URL: we will supply this to you
 API_KEY: the API key we supply to you
-DB_USER: the database username that you wish the integration service to use
-DB_PWD: the password for this database user
 DB_NAME: the database name
 DB_HOST: the hostname for the database
+
+For authentication with mysql user use the following config options:
+
+DB_USER: the database username that you wish the integration service to use
+DB_PWD: the password for this database user
+
+For authentication with Microsoft Active AD use the following config options:
+
+AZURE_USER_NAME: the username of the database access user from azure portal
+AZURE_PASSWORD: the password of the database access user from azure portal
+AZURE_CLIENT_ID: the client id from azure portal
+AZURE_TENANT_ID: the tenant id from azure portal ( Optional )
+
 MATTER_QUERY:  the query you wish the integration service to run in order to get matters.
                Naming should match https://swagger.capacityapp.io/swagger/#/default/post_matters
 CLIENT_QUERY: the query you wish the integration service to run in order to get clients.
@@ -46,6 +57,10 @@ DB_USER=SA
 DB_PWD=qwerty12
 DB_NAME=master
 DB_HOST=localhost
+AZURE_TENANT_ID=
+AZURE_USER_NAME=
+AZURE_PASSWORD=
+AZURE_CLIENT_ID=
 MATTER_QUERY=SELECT * from matters;
 CLIENT_QUERY=SELECT * from clients;
 PROFILE_QUERY=SELECT * from profiles;
