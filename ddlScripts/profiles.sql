@@ -10,7 +10,7 @@ CREATE TABLE profiles
     teamCodes             NVARCHAR(50),
     jobTitleCode          NVARCHAR(50) NOT NULL,
     officeCode            NVARCHAR(50),
-    fteHours              INT,
+    fteHours              FLOAT,
     utilisationTarget     INT,
     qualificationDate     DATE,
     chargeOutRateValue    INT,
