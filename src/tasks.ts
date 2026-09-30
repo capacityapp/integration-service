@@ -3,6 +3,7 @@ import uniqBy from 'lodash.uniqby'
 import { streamQuery } from 'databaseClient'
 import { post } from 'apiClient'
 import { logger } from 'logger'
+import { utilisationEndpoint } from 'utilisationContract'
 
 const MATTER_BATCH_SIZE = process.env.MATTER_BATCH_SIZE
   ? parseInt(process.env.MATTER_BATCH_SIZE, 10)
@@ -103,6 +104,7 @@ export const streamHistoricUtilisationToApi = async () => {
     return
   }
 
+  const endpoint = utilisationEndpoint(process.env.HISTORIC_UTILISATION_FORMAT)
   logger.info('Querying historic utilisation table')
 
   await streamQuery({
@@ -112,7 +114,7 @@ export const streamHistoricUtilisationToApi = async () => {
       logger.info(`Sending batch of ${rows?.length} utilisation rows to API`)
 
       await post({
-        endpoint: `integration/utilisation`,
+        endpoint,
         query: { state: process.env.SUBDOMAIN },
         body: rows,
       })

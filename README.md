@@ -80,3 +80,40 @@ If you’re running your database on the same server as the container and you wi
 ### Make sure you’re using Microsoft SQL Server for your datasource
 
 Currently we only support Microsoft SQL Server as the data source. If this is an issue please get in touch with our technical team, or alternatively implement the connection to the API yourselves.
+
+
+## Integration health monitor
+
+Receiver monitoring works without a container upgrade. Configure expected feeds,
+closing dates and approved contacts in Capacity as described in
+`INTEGRATION_HEALTH_MONITOR_PLAN.md`. The container never sends email or evidence
+outside the configured Capacity API. Logs contain only stage names/status and
+batch counts; errors intentionally omit SQL, source records and HTTP bodies.
+
+For the current daily API, set `HISTORIC_UTILISATION_FORMAT=daily` and update
+`HISTORIC_UTILISATION_QUERY` to return `day` (YYYY-MM-DD), `availableHours`,
+`utilisedHours` and `email` or `employeeId`. Send real daily source values including
+zero-hour rows where the export contract expects them. Do not convert a weekly
+total into invented daily data. Confirm source dates and sample counts before
+switching. The default remains `legacy_weekly` at `/integration/utilisation` for
+existing deployments; that route does not exist in the current backend. A new
+backend deployment therefore requires the explicit daily format and query.
+
+Set `REQUIRE_BATCH_RESULTS=true` once the backend supports per-record results.
+Every present result body is validated even without this flag; an HTTP 200 with
+rejected records fails the stage. Compatibility mode allows only an empty legacy
+successful response. Failed writes are not automatically retried because some
+endpoints are not idempotent. Repair the cause and let the next scheduled export
+reconcile source data.
+
+SQL connect timeout: 30 seconds; query timeout: 120 seconds; whole source stage:
+10 minutes; each API request: 120 seconds. The container uses a separate SQL pool
+per stage and closes it on success or failure. Runs do not overlap inside one
+process; operate one scheduled replica per source organisation. Configure the
+receiver silence threshold to allow the actual schedule, weekends and retries.
+Empty queries send no fabricated data. Empty delta heartbeat support is deferred;
+such feeds should not enable a traffic rule without an agreed periodic snapshot.
+`DB_ENCRYPT=true` enables encryption for SQL-auth connections; Azure driver
+connection defaults remain unchanged. No Docker images are published by tests.
+
+Validation: `yarn tsc`, `yarn lint-ci`, `yarn test`.
